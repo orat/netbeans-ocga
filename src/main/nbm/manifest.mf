@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Layer: de/orat/math/netbeans/ocga/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/orat/math/netbeans/ocga/Bundle.properties
+

@@ -1,0 +1,11 @@
+https://dzone.com/articles/quickstart-guide-language-supp
+--> Syntax-Highlighting mit Schliemann, aber das ist outdated
+
+http://web.archive.org/web/20130324230155/http://platform.netbeans.org/tutorials/nbm-projecttype.html
+
+https://blogsarchive.apache.org/netbeans/entry/lsp-client-demo-ba-sh
+--> das ist der aktuelle weg mit textmate und antlr
+
+
+http://wiki.apidesign.org/wiki/TruffleNetBeansDebugger
+--> debugging truffle languages with netbeans für version 8
