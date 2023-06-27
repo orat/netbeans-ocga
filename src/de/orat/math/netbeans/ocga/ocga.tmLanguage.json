@@ -1,9 +1,6 @@
 {
-	"name": "ocga",
-        "fileTypes": [
-            "ocga"
-        ],
-	"scopeName": "text.ocga",
+	"name": "OCGA",
+	"scopeName": "source.ocga",
 	"patterns": [
 		{
 			"include": "#comments"
