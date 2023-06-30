@@ -9,3 +9,8 @@ https://blogsarchive.apache.org/netbeans/entry/lsp-client-demo-ba-sh
 
 http://wiki.apidesign.org/wiki/TruffleNetBeansDebugger
 --> debugging truffle languages with netbeans für version 8
+
+"fileTypes": [
+            "ocga"
+        ],
+	
