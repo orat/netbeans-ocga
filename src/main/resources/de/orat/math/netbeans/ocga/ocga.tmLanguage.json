@@ -64,7 +64,7 @@
 			]
 		},
 		"functions": {
-			"begin": "((exp|normalize|abs|sqrt|atan2|negate14)|(translator|rotator))\\(",
+			"begin": "((exp|normalize|norm|abs|sqrt|atan2|negate14)|(translator|rotator))\\(",
 			"beginCaptures": {
 				"2": {
 					"name": "entity.name.function.base.ocga"

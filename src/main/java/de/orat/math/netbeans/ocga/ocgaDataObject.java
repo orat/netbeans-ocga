@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/NetBeansModuleDevelopment-files/templateDataObjectAnno.java to edit this template
- */
 package de.orat.math.netbeans.ocga;
 
 import java.io.IOException;
+import java.util.Set;
+import java.util.logging.Level;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.ActionID;
@@ -43,6 +41,17 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
             id = @ActionID(category = "System", id = "org.openide.actions.OpenAction"),
             position = 100,
             separatorAfter = 200
+    ),
+    @ActionReference(
+            path = "Loaders/text/x-ocga/Actions",
+            id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
+            position = 230
+    ),
+    @ActionReference(
+            path = "Loaders/text/x-ocga/Actions",
+            id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
+            position = 270,
+            separatorAfter = 290
     ),
     @ActionReference(
             path = "Loaders/text/x-ocga/Actions",
@@ -87,6 +96,19 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
             path = "Loaders/text/x-ocga/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
             position = 1400
+    ),
+    
+    // editor popups
+    @ActionReference(
+            path = "Editors/text/x-ocga/Popup",
+            id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
+            position = 30
+    ),
+    @ActionReference(
+            path = "Editors/text/x-ocga/Popup",
+            id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
+            position = 70,
+            separatorAfter = 90
     )
 })
 public class ocgaDataObject extends MultiDataObject {
@@ -94,6 +116,7 @@ public class ocgaDataObject extends MultiDataObject {
     public ocgaDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
         registerEditor("text/x-ocga", true);
+        registerTruffleMimeType("text/x-ocga");
     }
 
     @Override
@@ -112,6 +135,23 @@ public class ocgaDataObject extends MultiDataObject {
     @Messages("LBL_ocga_EDITOR=Source")
     public static MultiViewEditorElement createEditor(Lookup lkp) {
         return new MultiViewEditorElement(lkp);
+    }
+    
+    private void registerTruffleMimeType(String mime) throws IOException {
+        ClassLoader all = Lookup.getDefault().lookup(ClassLoader.class);
+        if (all == null) {
+            all = ocgaDataObject.class.getClassLoader();
+        }
+        try {
+            var clazz = all.loadClass("org.netbeans.modules.debugger.jpda.truffle.MIMETypes");
+            var getDefault = clazz.getMethod("getDefault");
+            var mimeTypes = getDefault.invoke(null);
+            var get = clazz.getMethod("get");
+            var toSet = (Set<String>)get.invoke(mimeTypes);
+            toSet.add(mime);
+        } catch (ReflectiveOperationException ex) {
+            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for Enso", ex);
+        }
     }
 
 }
