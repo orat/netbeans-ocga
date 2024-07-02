@@ -7,3 +7,9 @@ For this file-type Syntax-Highlighting based on [Textmate](https://macromates.co
 
 To use it, simply reload it into the running IDE.
 
+## Disclaimer
+The project is in an early state of development but Syntaxhighlighting works fine. 
+
+If you have feedback or feature suggestions, please create a new GitHub Issue.
+
+
