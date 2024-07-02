@@ -7,6 +7,7 @@ This is a plugin for the Netbeans-IDE which includes a ".ocga"-file type for inc
 
 For this file-type Syntax-Highlighting based on [Textmate](https://macromates.com/manual/en/language_grammars) is added. Further tooling support is planed. Implementation of debugging support is started.
 
+## Execution
 To use it, simply reload it into the running IDE.
 
 ## Disclaimer
