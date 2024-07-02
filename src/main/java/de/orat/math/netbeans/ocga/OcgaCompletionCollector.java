@@ -9,9 +9,9 @@ import javax.swing.text.Document;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
 import org.netbeans.api.lsp.Completion;
 import org.netbeans.spi.lsp.CompletionCollector;
+
 /**
- *
- * @author Oliver Rettig (Oliver.Rettig@orat.de)
+  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
 @MimeRegistration(mimeType = "text/x-ocga", service = CompletionCollector.class)
 public class OcgaCompletionCollector implements CompletionCollector {
@@ -20,6 +20,4 @@ public class OcgaCompletionCollector implements CompletionCollector {
     public boolean collectCompletions(Document dcmnt, int i, Completion.Context cntxt, Consumer<Completion> cnsmr) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-  
-
 }
