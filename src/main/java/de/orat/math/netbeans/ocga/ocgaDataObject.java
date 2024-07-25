@@ -150,7 +150,7 @@ public class ocgaDataObject extends MultiDataObject {
             var toSet = (Set<String>)get.invoke(mimeTypes);
             toSet.add(mime);
         } catch (ReflectiveOperationException ex) {
-            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for Enso", ex);
+            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for ocga", ex);
         }
     }
 

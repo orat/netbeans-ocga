@@ -8,7 +8,8 @@ import org.netbeans.api.editor.mimelookup.MimeRegistration;
 import org.netbeans.api.lsp.StructureElement;
 import org.netbeans.spi.lsp.StructureProvider;
 
-@MimeRegistration(mimeType = "text/x-ocga", service = StructureProvider.class)
+// wird vermutlich nur vom LSPServer gebraucht
+//@MimeRegistration(mimeType = "text/x-ocga", service = StructureProvider.class)
 public final class OcgaStructure implements StructureProvider {
 
     @Override

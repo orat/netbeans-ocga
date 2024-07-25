@@ -6,7 +6,9 @@ import org.netbeans.modules.lsp.client.spi.LanguageServerProvider;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 
-@MimeRegistration(mimeType="text/x-ocga", service=LanguageServerProvider.class)
+//@MimeRegistration(mimeType="text/x-ocga", service=LanguageServerProvider.class)
+// TODO herausfinden, wie ich einen Language-server aufbaue und bundle, den ich dann
+// mit vergleichbarem code zu dieser Klasse starten kann
 public class LSPSupport implements LanguageServerProvider {
 
    // Caveat: the language server is started only for files that are inside a project, 
