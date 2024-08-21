@@ -16,4 +16,9 @@ public final class OcgaStructure implements StructureProvider {
     public List<StructureElement> getStructure(Document dcmnt) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    static List<StructureElement> collectStructure(Document dcmt){
+        return null;
+        //TODO
+    }
 }
