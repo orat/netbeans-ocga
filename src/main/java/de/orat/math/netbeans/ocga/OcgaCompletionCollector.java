@@ -1,5 +1,6 @@
 package de.orat.math.netbeans.ocga;
 
+import static de.orat.math.netbeans.ocga.GAUtilities.GA_MIME_TYPE;
 import java.util.function.Consumer;
 import javax.swing.text.Document;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
@@ -9,7 +10,7 @@ import org.netbeans.spi.lsp.CompletionCollector;
 /**
  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
-@MimeRegistration(mimeType = "text/x-ocga", service = CompletionCollector.class)
+@MimeRegistration(mimeType = GAUtilities.GA_MIME_TYPE, service = CompletionCollector.class)
 public class OcgaCompletionCollector implements CompletionCollector {
 
     @Override

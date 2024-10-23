@@ -15,7 +15,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 
 // https://github.com/oracle/graal/blob/master/tools/README.md
-//@MimeRegistration(mimeType="text/x-ocga", service=LanguageServerProvider.class)
+//@MimeRegistration(mimeType=GA_MIME_TYPE, service=LanguageServerProvider.class)
 // TODO herausfinden, wie ich einen Language-server aufbaue und bundle, den ich dann
 // mit vergleichbarem code zu dieser Klasse starten kann
 // https://www.graalvm.org/latest/tools/lsp/
@@ -86,5 +86,4 @@ public class LSPSupport implements LanguageServerProvider {
         }
         return null;
    }
-
 }
