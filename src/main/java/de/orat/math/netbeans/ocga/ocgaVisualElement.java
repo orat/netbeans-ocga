@@ -19,7 +19,7 @@ import org.openide.windows.TopComponent;
 @MultiViewElement.Registration(
         displayName = "#LBL_ocga_VISUAL",
         iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
-        mimeType = "text/x-ocga",
+        mimeType = "+GAUtilities.GA_MIME_TYPE+",
         persistenceType = TopComponent.PERSISTENCE_NEVER,
         preferredID = "ocgaVisual",
         position = 2000

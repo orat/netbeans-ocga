@@ -2,15 +2,12 @@ https://dzone.com/articles/quickstart-guide-language-supp
 --> Syntax-Highlighting mit Schliemann, aber das ist outdated
 
 http://web.archive.org/web/20130324230155/http://platform.netbeans.org/tutorials/nbm-projecttype.html
+--> impl project-type, aber besser bei netbeansPython schauen, bzw. im Buch mit Ergänzung des java project-types
 
 https://blogsarchive.apache.org/netbeans/entry/lsp-client-demo-ba-sh
 --> das sind die aktuellen Wege mit textmate und alternativ antlr
 
-
 http://wiki.apidesign.org/wiki/TruffleNetBeansDebugger
 --> debugging truffle languages with netbeans für version 8
-
-TODO
-ocga-->ga
 
 	
