@@ -1,0 +1,63 @@
+Deploying test module /home/oliver/JAVA/PROJECTS/netbeans-ocga/target/nbm/clusters/extra/modules/de-orat-math-netbeans-ocga.jar...
+Disabling StandardModule:de.orat.math.netbeans.ocga jarFile: /home/oliver/JAVA/PROJECTS/netbeans-ocga/target/nbm/clusters/extra/modules/de-orat-math-netbeans-ocga.jar...
+Enabling StandardModule:de.orat.math.netbeans.ocga jarFile: /home/oliver/JAVA/PROJECTS/netbeans-ocga/target/nbm/clusters/extra/modules/de-orat-math-netbeans-ocga.jar...
+Installer: Try to get the graalvm context...
+Failed to get the graalvm context: java.util.ServiceConfigurationError: com.oracle.truffle.api.provider.InternalResourceProvider: com.oracle.truffle.runtime.LibTruffleAttachResourceProvider not a subtype
+org.graalvm.polyglot.PolyglotException: java.util.ServiceConfigurationError: com.oracle.truffle.api.provider.InternalResourceProvider: com.oracle.truffle.runtime.LibTruffleAttachResourceProvider not a subtype
+	at java.base/java.util.ServiceLoader.fail(ServiceLoader.java:589)
+	at java.base/java.util.ServiceLoader$LazyClassPathLookupIterator.hasNextService(ServiceLoader.java:1240)
+	at java.base/java.util.ServiceLoader$LazyClassPathLookupIterator$1.run(ServiceLoader.java:1272)
+	at java.base/java.util.ServiceLoader$LazyClassPathLookupIterator$1.run(ServiceLoader.java:1271)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at java.base/java.util.ServiceLoader$LazyClassPathLookupIterator.hasNext(ServiceLoader.java:1274)
+	at java.base/java.util.ServiceLoader$2.hasNext(ServiceLoader.java:1305)
+	at java.base/java.util.ServiceLoader$3.hasNext(ServiceLoader.java:1387)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:132)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:556)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:546)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:611)
+	at com.oracle.truffle.polyglot.InternalResourceCache.collectOptionalResources(InternalResourceCache.java:413)
+	at com.oracle.truffle.polyglot.InternalResourceCache.loadOptionalInternalResources(InternalResourceCache.java:399)
+	at com.oracle.truffle.polyglot.LanguageCache.createLanguages(LanguageCache.java:270)
+	at com.oracle.truffle.polyglot.LanguageCache.loadLanguages(LanguageCache.java:261)
+	at com.oracle.truffle.polyglot.LanguageCache.languages(LanguageCache.java:222)
+	at com.oracle.truffle.polyglot.InternalResourceRoots.computeRoots(InternalResourceRoots.java:178)
+	at com.oracle.truffle.polyglot.InternalResourceRoots.ensureInitialized(InternalResourceRoots.java:99)
+	at com.oracle.truffle.polyglot.PolyglotImpl.buildEngine(PolyglotImpl.java:295)
+	at org.graalvm.polyglot.Engine$Builder.build(Engine.java:756)
+	at org.graalvm.polyglot.Context$Builder.build(Context.java:1925)
+	at de.orat.math.netbeans.ocga.Installer.restored(Installer.java:48)
+	at org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:455)
+	at org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:378)
+	at org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:77)
+	at org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:330)
+	at org.openide.filesystems.FileUtil$2.run(FileUtil.java:420)
+	at org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:102)
+	at org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:494)
+	at org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:404)
+	at org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:424)
+	at org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:327)
+	at org.netbeans.ModuleManager.doEnable(ModuleManager.java:1501)
+	at org.netbeans.ModuleManager.enable(ModuleManager.java:1344)
+	at org.netbeans.ModuleManager.enable(ModuleManager.java:1242)
+	at org.netbeans.ModuleManager.enable(ModuleManager.java:1238)
+	at org.netbeans.core.startup.ModuleSystem.deployTestModule(ModuleSystem.java:418)
+	at org.netbeans.core.startup.TestModuleDeployer.deployTestModule(TestModuleDeployer.java:46)
+	at org.netbeans.modules.maven.apisupport.ExecutionChecker.executionResult(ExecutionChecker.java:69)
+	at org.netbeans.modules.maven.execute.MavenCommandLineExecutor.run(MavenCommandLineExecutor.java:357)
+	at org.netbeans.core.execution.RunClassThread.doRun(RunClassThread.java:131)
+	at org.netbeans.modules.openide.util.GlobalLookup.execute(GlobalLookup.java:45)
+	at org.openide.util.lookup.Lookups.executeWith(Lookups.java:287)
+	at org.netbeans.core.execution.RunClassThread.run(RunClassThread.java:80)
+	Suppressed: Attached Guest Language Frames (0)
+Internal GraalVM error, please report at https://github.com/oracle/graal/issues/.
+
+
+Ursache?:
+You should not add GraalSDK or Truffle to the application classpath on GraalVM 
+manually, as that will duplicate certain classes that are already classpath and 
+might lead to problems like you are seeing. 

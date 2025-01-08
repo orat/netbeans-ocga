@@ -147,8 +147,12 @@ public class ocgaDataObject extends MultiDataObject {
             var getDefault = clazz.getMethod("getDefault");
             var mimeTypes = getDefault.invoke(null);
             var get = clazz.getMethod("get");
-            /*var toSet = */((Set<String>) get.invoke(mimeTypes)).add(mime);
+            /*var toSet = */ //((Set<String>) get.invoke(mimeTypes)).add(mime);
             //toSet.add(mime);
+            
+            // damit ich das mit expliziten Classes implementieren kann muss ich   
+            // org-netbeans-modules-debugger-jpda-truffle als dependency hinzufügen
+            
         } catch (ReflectiveOperationException ex) {
             Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for ocga", ex);
         }

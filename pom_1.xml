@@ -34,9 +34,9 @@
                 <configuration>
                  <source>21</source>
                  <target>21</target>
-                    <!--compilerArgs>
+                    <compilerArgs>
                         <arg>-Xlint:unchecked</arg>
-                    </compilerArgs-->
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <!-- benötigt für nbm packaging -->
@@ -153,12 +153,12 @@
         </dependency>
         
         <!-- wozu das denn -->
-        <!--dependency>
+        <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>2.13.14</version>
             <type>jar</type>
-        </dependency-->
+        </dependency>
         
         <!-- nötig um einen Language-server in netbeans registrieren zu können
              für mimetypes unserer Programmiersprache -->
@@ -287,11 +287,17 @@
              <version>${graalvm.version}</version>
              <type>pom</type>
         </dependency-->
-        <!-- brauche ich das neben lsp-tool oder brauche ich nur das fragezeichen 
-             sollte indirekt schon über das POM von ga mit drin sein -->
-        <!--dependency>
+        <!-- brauche ich das neben lsp-tool oder brauche ich nur das fragezeichen -->
+        <dependency>
              <groupId>org.graalvm.polyglot</groupId>
              <artifactId>lsp-community</artifactId>
+             <version>${graalvm.version}</version>
+             <!-- warum pom und nicht jar -->
+             <type>pom</type>
+        </dependency>
+        <!--dependency>
+             <groupId>org.graalvm.polyglot</groupId>
+             <artifactId>js</artifactId>
              <version>${graalvm.version}</version>
              <type>pom</type>
         </dependency-->
@@ -378,6 +384,89 @@
         </dependency>
         
         
+        <!-- Ohne das folgende Modul gibts folgenden Fehler beim Ausführen von TestScripting
+             [ERROR] Project uses classes from transitive module org.netbeans.
+             api:org-netbeans-api-scripting:jar:RELEASE150 which will not be accessible at runtime.-->
+        <!--dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-api-scripting</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency-->
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-libs-truffleapi</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        
+        <!-- WOARAROUND da org-netbeans-libs-truffleapi davon abhängig ist, aber 
+             packages nicht als public packages exportiert -->
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-compiler</artifactId>
+            <version>${graalvm.version}</version>
+            <type>jar</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-libs-graalsdk</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        <!-- [ERROR] Project depends on packages not accessible at runtime in module 
+                     org.netbeans.api:org-netbeans-libs-graalsdk:jar:RELEASE220-->
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>nativeimage</artifactId>
+            <version>${graalvm.version}</version>
+            <type>jar</type>
+            <!--scope>runtime</scope-->
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>word</artifactId>
+            <version>${graalvm.version}</version>
+            <type>jar</type>
+            <!--scope>runtime</scope-->
+        </dependency>
+        
+        <!-- [ERROR] Failed to execute goal org.apache.netbeans.utilities:
+             nbm-maven-plugin:14.2:manifest (default-manifest) on project netbeans-ocga: 
+             Uncategorized problems with NetBeans dependency verification (maybe MNBMODULE-102 
+             or wrong maven dependency metadata). Supposedly external classes are 
+             used in the project's binaries but the classes are not found on classpath. 
+             Class usages: [com.oracle.truffle.compiler.HostMethodInfo, 
+                            com.oracle.truffle.compiler.hotspot.HotSpotTruffleCompiler, 
+                            com.oracle.truffle.compiler.TruffleCompilerListener, 
+                            com.oracle.truffle.compiler.TruffleCompiler, 
+                            org.graalvm.nativeimage.c.function.CEntryPoint, 
+                            org.graalvm.nativeimage.c.function.CEntryPointLiteral, 
+                            org.graalvm.nativeimage.UnmanagedMemory, 
+                            org.graalvm.nativeimage.c.function.CFunctionPointer, 
+                            org.graalvm.nativeimage.LogHandler, 
+                            com.oracle.truffle.compiler.hotspot.libgraal.TruffleFromLibGraal, 
+                            com.oracle.truffle.compiler.TruffleCompilable, 
+                            org.graalvm.word.UnsignedWord, 
+                            com.oracle.truffle.compiler.hotspot.libgraal.TruffleToLibGraal, 
+                            com.oracle.truffle.compiler.TruffleSourceLanguagePosition, 
+                            org.graalvm.nativeimage.c.type.CCharPointer, 
+                            org.graalvm.nativeimage.ImageInfo, 
+                            org.graalvm.nativeimage.IsolateThread, 
+                            org.graalvm.nativeimage.ImageSingletons, 
+                            com.oracle.truffle.compiler.TruffleCompilationTask, 
+                            com.oracle.truffle.compiler.PartialEvaluationMethodInfo, 
+                            com.oracle.truffle.compiler.TruffleCompilerOptionDescriptor, 
+                            org.graalvm.nativeimage.ProcessProperties, 
+                            org.graalvm.nativeimage.c.type.CTypeConversion, 
+                            com.oracle.truffle.compiler.TruffleCompilerAssumptionDependency, 
+                            org.graalvm.word.PointerBase, 
+                            com.oracle.truffle.compiler.OptimizedAssumptionDependency, 
+                            com.oracle.truffle.compiler.TruffleCompilerRuntime, 
+                            com.oracle.truffle.compiler.TruffleCompilationSupport, 
+                            org.graalvm.word.WordFactory, 
+                            com.oracle.truffle.compiler.ConstantFieldInfo, 
+                            org.graalvm.nativeimage.hosted.Feature] -> [Help 1]-->
+                        <!--org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.netbeans.utilities:nbm-maven-plugin:14.2:manifest (default-manifest) on project netbeans-ocga: Uncategorized problems with NetBeans dependency verification (maybe MNBMODULE-102 or wrong maven dependency metadata). Supposedly external classes are used in the project's binaries but the classes are not found on classpath. Class usages: [com.oracle.truffle.compiler.HostMethodInfo, com.oracle.truffle.compiler.hotspot.HotSpotTruffleCompiler, com.oracle.truffle.compiler.TruffleCompilerListener, com.oracle.truffle.compiler.TruffleCompiler, org.graalvm.nativeimage.c.function.CEntryPoint, org.graalvm.nativeimage.c.function.CEntryPointLiteral, org.graalvm.nativeimage.UnmanagedMemory, org.graalvm.nativeimage.c.function.CFunctionPointer, org.graalvm.nativeimage.LogHandler, com.oracle.truffle.compiler.hotspot.libgraal.TruffleFromLibGraal, com.oracle.truffle.compiler.TruffleCompilable, org.graalvm.word.UnsignedWord, com.oracle.truffle.compiler.hotspot.libgraal.TruffleToLibGraal, com.oracle.truffle.compiler.TruffleSourceLanguagePosition, org.graalvm.nativeimage.c.type.CCharPointer, org.graalvm.nativeimage.ImageInfo, org.graalvm.nativeimage.IsolateThread, org.graalvm.nativeimage.ImageSingletons, com.oracle.truffle.compiler.TruffleCompilationTask, com.oracle.truffle.compiler.PartialEvaluationMethodInfo, com.oracle.truffle.compiler.TruffleCompilerOptionDescriptor, org.graalvm.nativeimage.ProcessProperties, org.graalvm.nativeimage.c.type.CTypeConversion, com.oracle.truffle.compiler.TruffleCompilerAssumptionDependency, org.graalvm.word.PointerBase, com.oracle.truffle.compiler.OptimizedAssumptionDependency, com.oracle.truffle.compiler.TruffleCompilerRuntime, com.oracle.truffle.compiler.TruffleCompilationSupport, org.graalvm.word.WordFactory, com.oracle.truffle.compiler.ConstantFieldInfo, org.graalvm.nativeimage.hosted.Feature]-->
+
         
         <!-- da steht truffle.MIMETypes drin ... ocgaDataObject...-->
         <!--dependency>
@@ -385,12 +474,9 @@
             <artifactId>org-netbeans-modules-debugger-jpda-truffle</artifactId>
             <version>${netbeans.version}</version>
         </dependency-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.14.0</version>
-            <type>jar</type>
-        </dependency>
+        
+        
+
     </dependencies>
     
     <!-- muessen hier explizit erneut definiert werden, werden also nicht aus dem
@@ -403,8 +489,8 @@
         <!-- das passt zu /home/oliver/graalvm-jdk-21.0.4+8.1/bin/java -->
         <!--graalvm.version>23.1.4</graalvm.version-->
         <!-- das passt zu graalvm-jdk-23.0.1+11.1/bin/java -->
-        <graalvm.version>24.1.1</graalvm.version>
-        <!--graalvm.version>24.0.0</graalvm.version-->
+        <!--graalvm.version>24.1.1</graalvm.version-->
+        <graalvm.version>24.0.0</graalvm.version>
         <netbeans.version>RELEASE220</netbeans.version>
     </properties>
     

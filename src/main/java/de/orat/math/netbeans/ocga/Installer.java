@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.graalvm.polyglot.Context;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.Lookup;
@@ -32,7 +33,7 @@ public class Installer extends ModuleInstall {
         
         // Language Server starten
 
-        try {
+        /*try {
             Map<String, String> options = new HashMap<>();
             // -J-Dgraalvm.locatorDisabled=true -J--add-exports=org.graalvm.truffle/com.oracle.truffle.api.nodes=ALL-UNNAMED 
             // -J--add-exports=org.graalvm.truffle/com.oracle.truffle.api.exception=ALL-UNNAMED 
@@ -43,7 +44,7 @@ public class Installer extends ModuleInstall {
             options.put("add-exports","org.graalvm.truffle/com.oracle.truffle.api.exception=ALL-UNNAMED");
             options.put("add-exports","org.graalvm.truffle/com.oracle.truffle.api.interop=ALL-UNNAMED");
             System.out.println("Installer: Try to get the graalvm context...");
-            Context context = Context.newBuilder().options(options).allowAllAccess(true)
+            Context context = Context.newBuilder("js").options(options).allowAllAccess(true)
                .allowExperimentalOptions(true).option("lsp", "true").build();//) {
             // mit .option("","true") kann ich alle benötigten Optionen hineinschleusen
             // ohne dies bereits beim Start von Netbeans übergeben zu müssen...
@@ -56,20 +57,13 @@ public class Installer extends ModuleInstall {
             for (String id : languages) {
                 System.out.println("found \""+id+"\"!");
             }
-            /*
-            Context created!
-            found llvm
-            found java
-            found js
-            found python
-            found ruby
-            found wasm
-            [Graal LSP] Starting server and listening on localhost/127.0.0.1:8123
-            */
+            
         //} 
         } catch (Exception e){
             System.out.println("Failed to get the graalvm context: "+e.getMessage());
+            //String errorMessage = ExceptionUtils.getStackTrace(e); 
+            //System.out.println(errorMessage);
             e.printStackTrace();
-        }
+        }*/
     }
 }

@@ -10,4 +10,12 @@ https://blogsarchive.apache.org/netbeans/entry/lsp-client-demo-ba-sh
 http://wiki.apidesign.org/wiki/TruffleNetBeansDebugger
 --> debugging truffle languages with netbeans für version 8
 
+---
+
+https://andzac.github.io/anwn/Development%20docs/Language%20Server/lsp4j/
+https://github.com/eclipse-lsp4j/lsp4j/blob/main/documentation/README.md
+--> eigenen LSP in Java implementieren für statische Code-Analysis
+
+https://github.com/oracle/graal/blob/master/tools/src/org.graalvm.tools.lsp/src/org/graalvm/tools/lsp/server/LanguageServerImpl.java
+--> graalVM-LSP start source
 	

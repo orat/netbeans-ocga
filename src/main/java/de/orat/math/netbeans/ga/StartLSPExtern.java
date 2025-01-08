@@ -5,7 +5,7 @@ import org.graalvm.polyglot.Context;
 
 /**
  * CAVEAT
- * Netbeans muss mit den folgende commanline arguments aufgerufen werden:
+ * Has to be invoked via maven with the following commanline arguments:
  * -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 
  * -Dgraalvm.locatorDisabled=true 
  * --add-exports org.graalvm.truffle/com.oracle.truffle.api.nodes=ALL-UNNAMED 
@@ -15,37 +15,21 @@ import org.graalvm.polyglot.Context;
  * 
  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
-public class Test {
+public class StartLSPExtern {
     
     public static void main(String[] args){
         
         try {
             Context context = Context.newBuilder("ga").allowAllAccess(true)
                .allowExperimentalOptions(true).option("lsp", "true").build();//) {
-            // mit .option("","true") kann ich alle benötigten Optionen hineinschleusen
-            // ohne dies bereits beim Start von Netbeans übergeben zu müssen...
             // https://www.graalvm.org/latest/reference-manual/embed-languages/#dependency-setup
             System.out.println("Context created!");
             Set<String> languages = context.getEngine().getLanguages().keySet();
             for (String id : languages) {
                 System.out.println("found \""+id+"\"!");
             }
-            /*
-            Context created!
-            found llvm
-            found java
-            found js
-            found python
-            found ruby
-            found wasm
-            [Graal LSP] Starting server and listening on localhost/127.0.0.1:8123
-            */
-            
-            //TODO
-            // herausfinden wie ich an in/out-Stream drankomme etc.
-        //} 
         } catch (Exception e){
-            e.printStackTrace();
+            e.printStackTrace(System.out);
             System.out.println(e.getMessage());
         }
     }
