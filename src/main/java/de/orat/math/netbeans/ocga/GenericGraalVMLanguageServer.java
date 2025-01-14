@@ -83,7 +83,7 @@ import org.openide.util.Lookup;
 /**
  * Caveat: The language server is started only for files that are inside any project.
  */
-@MimeRegistration(mimeType=GAUtilities.GA_MIME_TYPE, service=LanguageServerProvider.class)
+//@MimeRegistration(mimeType=GAUtilities.GA_MIME_TYPE, service=LanguageServerProvider.class)
 public class GenericGraalVMLanguageServer implements LanguageServerProvider {
     
     static final Logger LOG = Logger.getLogger(GenericGraalVMLanguageServer.class.getName());
