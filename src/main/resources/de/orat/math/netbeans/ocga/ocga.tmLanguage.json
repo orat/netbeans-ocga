@@ -64,7 +64,7 @@
 			]
 		},
 		"functions": {
-			"begin": "((up|down|exp|log|normalize|norm|abs|sqrt|atan2|negate14|tan|sin|sinh|cos|cosh|atan|asin|acos|sign)|(translator|rotator))\\(",
+			"begin": "((dot|ip|scp|up|down|exp|log|normalize|norm|abs|sqrt|atan2|negate14|tan|sin|sinh|cos|cosh|atan|asin|acos|sign)|(translator|rotator))\\(",
 			"beginCaptures": {
 				"2": {
 					"name": "entity.name.function.base.ocga"
