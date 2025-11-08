@@ -20,30 +20,35 @@
                 <groupId>org.apache.netbeans.utilities</groupId>
                 <!-- this plugin registers the nbm packaging type -->
                 <artifactId>nbm-maven-plugin</artifactId>
-                <version>14.2</version>
+                <version>14.4</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <useOSGiDependencies>false</useOSGiDependencies>
-                </configuration>
+                <!--configuration>
+                    <useOSGiDependencies>true</useOSGiDependencies>
+                </configuration-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <!--version>3.8.1</version-->
-                <version>3.13.0</version>
+                <!--version>3.13.0</version-->
+                <version>3.14.1</version>
                 <configuration>
-                 <source>21</source>
-                 <target>21</target>
+                    <compilerArgument>-proc:full</compilerArgument>
+                    <!--source>21</source>
+                    <target>21</target-->
                     <!--compilerArgs>
                         <arg>-Xlint:unchecked</arg>
                     </compilerArgs-->
+                    <compilerArgs>
+                        <arg>-Xlint</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <!-- benötigt für nbm packaging -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.4.2</version>
                 <configuration>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
@@ -129,12 +134,6 @@
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-textmate-lexer</artifactId>
-            <version>${netbeans.version}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-editor-mimelookup</artifactId>
             <version>${netbeans.version}</version>
             <type>jar</type>
@@ -162,12 +161,6 @@
         
         <!-- nötig um einen Language-server in netbeans registrieren zu können
              für mimetypes unserer Programmiersprache -->
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-lsp-client</artifactId>
-            <version>${netbeans.version}</version>
-            <type>jar</type>
-        </dependency>
         <!--dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-debugger-jpda</artifactId>
@@ -391,6 +384,35 @@
             <version>3.14.0</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.13.2</version>
+            <!--type>pom.sha512</type-->
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>26.0.2</version>
+            <!--type>jar.asc.sha256</type>
+            <classifier>common</classifier-->
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-textmate-lexer</artifactId>
+            <version>RELEASE270</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.5.0-jre</version>
+            <!--scope>runtime</scope>
+            <type>pom.sha512</type-->
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     <!-- muessen hier explizit erneut definiert werden, werden also nicht aus dem
@@ -399,13 +421,14 @@
          module gebaut werden. -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>24</maven.compiler.release>
+        
         <!--maven.compiler.release>17</maven.compiler.release-->
         <!-- das passt zu /home/oliver/graalvm-jdk-21.0.4+8.1/bin/java -->
         <!--graalvm.version>23.1.4</graalvm.version-->
         <!-- das passt zu graalvm-jdk-23.0.1+11.1/bin/java -->
         <graalvm.version>24.1.1</graalvm.version>
-        <!--graalvm.version>24.0.0</graalvm.version-->
-        <netbeans.version>RELEASE220</netbeans.version>
+        <netbeans.version>RELEASE270</netbeans.version>
     </properties>
     
     <name>netbeans-ocga</name>

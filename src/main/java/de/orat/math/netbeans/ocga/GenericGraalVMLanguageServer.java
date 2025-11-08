@@ -36,8 +36,8 @@ import org.graalvm.tools.lsp.server.ContextAwareExecutor;
 import org.graalvm.tools.lsp.server.LSPFileSystem;
 import org.graalvm.tools.lsp.server.TruffleAdapter;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
-import org.netbeans.modules.lsp.client.options.MimeTypeInfo;
-import org.netbeans.modules.lsp.client.spi.LanguageServerProvider;
+//import org.netbeans.modules.lsp.client.options.MimeTypeInfo;
+//import org.netbeans.modules.lsp.client.spi.LanguageServerProvider;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 
@@ -84,7 +84,7 @@ import org.openide.util.Lookup;
  * Caveat: The language server is started only for files that are inside any project.
  */
 //@MimeRegistration(mimeType=GAUtilities.GA_MIME_TYPE, service=LanguageServerProvider.class)
-public class GenericGraalVMLanguageServer implements LanguageServerProvider {
+public class GenericGraalVMLanguageServer /*implements LanguageServerProvider*/ {
     
     static final Logger LOG = Logger.getLogger(GenericGraalVMLanguageServer.class.getName());
     
@@ -101,7 +101,7 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
    // class-path eingefügt worden sein?
    // Was bekomme ich über den lookup was davon muss ich weitergeben?
    //@Override
-   public LanguageServerDescription startServer2(Lookup lkp) {
+   public /*LanguageServerDescription*/ void startServer2(Lookup lkp) {
        
         // Ausgabe landet in der shell in der Netbeans gestartet wird
         System.out.println("LSP starting...");
@@ -180,8 +180,9 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
                         //addTruffleAdapter(engine, env, GA_LANGUAGE_NAME);
                         System.out.println("LSP started!");
                         GenericGraalVMLanguageServer.LOG.log(Level.INFO, "LSP started!");
-                        return LanguageServerDescription.create(env.in(), 
-                            env.out(), null);
+                        //return LanguageServerDescription.create(env.in(), 
+                        //    env.out(), null);
+                        return;
                     } else {
                         System.err.println("LSP Environment not found!");
                         GenericGraalVMLanguageServer.LOG.log(Level.WARNING, "LSP EnvironmentProvider not found!");
@@ -217,14 +218,14 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
             //System.out.println(errorMessage);
             e.printStackTrace(); // liefert seltsamer weise keine Ausgabe auf der Console
         }
-        return null;
+        //return null;
    }
    
    // Caveat: the language server is started only for files that are inside a project, 
    // so create (any) new project, and put the file with the DSL code in a subfolder
    // of this project
    //@Override
-   public LanguageServerDescription startServer3(Lookup lkp) {
+   public /*LanguageServerDescription*/ void startServer3(Lookup lkp) {
        
        //MimeTypeInfo mti = lkp.lookup(MimeTypeInfo.class);
        // if (mti == null){
@@ -245,18 +246,19 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
                    .directory(workingDirectory); 
            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
            Process p = pb.start();
-           return LanguageServerDescription.create(p.getInputStream(), p.getOutputStream(), p);
+           //return LanguageServerDescription.create(p.getInputStream(), p.getOutputStream(), p);
+           return;
        } catch (IOException ex) {
            System.out.println(ex.getMessage());
            Exceptions.printStackTrace(ex);
-           return null;
+           //return null;
        }
    }
    
    int port = 8123;
    // connection via Socket
-   @Override
-   public LanguageServerDescription startServer(Lookup lkp) {
+   //@Override
+   public /*LanguageServerDescription*/ void startServer(Lookup lkp) {
        try {
            
            File workingDirectory = new File("/home/oliver/JAVA/PROJECTS/DSL4GeometricAlgebra/target");
@@ -280,7 +282,7 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
                 OutputStream os = new CopyOutput(socket.getOutputStream(), System.err);
                 InputStream is = new CopyInput(socket.getInputStream(), System.err);
 
-                return LanguageServerDescription.create(is, os, p);
+                //return LanguageServerDescription.create(is, os, p);
             } catch (ConnectException e){
                 System.err.println("Error while connecting: "+e.getMessage());
             } catch (SocketTimeoutException e){
@@ -292,10 +294,11 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
                 System.err.println("IOException: "+ioe.getMessage());
                 ioe.printStackTrace(System.err);
             }
-           return null;
+            //return null;
+            return ;
        } catch (IOException ex) {
            Exceptions.printStackTrace(ex);
-           return null;
+           //return null;
        }
    }
    

@@ -1,7 +1,7 @@
 package de.orat.math.netbeans.ga;
 
-import java.util.Set;
-import org.graalvm.polyglot.Context;
+//import java.util.Set;
+//import org.graalvm.polyglot.Context;
 
 /**
  * CAVEAT
@@ -19,7 +19,7 @@ public class StartLSPExtern {
     
     public static void main(String[] args){
         
-        try {
+        /*try {
             Context context = Context.newBuilder("ga").allowAllAccess(true)
                .allowExperimentalOptions(true).option("lsp", "true").build();//) {
             // https://www.graalvm.org/latest/reference-manual/embed-languages/#dependency-setup
@@ -31,6 +31,6 @@ public class StartLSPExtern {
         } catch (Exception e){
             e.printStackTrace(System.out);
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 }

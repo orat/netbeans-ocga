@@ -1,3 +1,10 @@
+[INFO] Private classes referenced in module: [com.google.gson.JsonSyntaxException, com.google.gson.Gson, com.google.common.util.concurrent.ListenableFuture, com.google.common.collect.Lists, com.google.common.collect.ArrayListMultimap, com.google.gson.GsonBuilder, com.google.gson.JsonParser, com.google.gson.JsonElement, com.google.gson.reflect.TypeToken]
+[ERROR] Project depends on packages not accessible at runtime in module org.netbeans.api:
+org-netbeans-modules-lsp-client:jar:RELEASE270
+
+[ERROR] Project depends on packages not accessible at runtime in module org.netbeans.api:
+org-netbeans-modules-textmate-lexer:jar:RELEASE270
+
 https://dzone.com/articles/quickstart-guide-language-supp
 --> Syntax-Highlighting mit Schliemann, aber das ist outdated
 
