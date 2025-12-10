@@ -402,7 +402,8 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-textmate-lexer</artifactId>
-            <version>RELEASE270</version>
+            <!--version>RELEASE270</version-->
+            <version>${netbeans.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>

@@ -1,5 +1,6 @@
 package de.orat.math.netbeans.ocga;
 
+import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.io.IOException;
 import java.util.Set;
 import java.util.logging.Level;
@@ -25,87 +26,87 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 })
 @MIMEResolver.ExtensionRegistration(
         displayName = "#LBL_ocga_LOADER",
-        mimeType = GAUtilities.GA_MIME_TYPE,
+        mimeType = GaFileUtils.GA_MIME_TYPE,
         extension = {"ocga"}
 )
 @DataObject.Registration(
-        mimeType = GAUtilities.GA_MIME_TYPE,
+        mimeType = GaFileUtils.GA_MIME_TYPE,
         iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
         displayName = "#LBL_ocga_LOADER",
         position = 300
 )
-@GrammarRegistration(grammar="ocga.tmLanguage.json", mimeType=GAUtilities.GA_MIME_TYPE)
+@GrammarRegistration(grammar="ocga.tmLanguage.json", mimeType=GaFileUtils.GA_MIME_TYPE)
 @ActionReferences({
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.OpenAction"),
             position = 100,
             separatorAfter = 200
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
             position = 230
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
             position = 270,
             separatorAfter = 290
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.CutAction"),
             position = 300
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.CopyAction"),
             position = 400,
             separatorAfter = 500
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.DeleteAction"),
             position = 600
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.RenameAction"),
             position = 700,
             separatorAfter = 800
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.SaveAsTemplateAction"),
             position = 900,
             separatorAfter = 1000
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.FileSystemAction"),
             position = 1100,
             separatorAfter = 1200
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.ToolsAction"),
             position = 1300
     ),
     @ActionReference(
-            path = "Loaders/"+GAUtilities.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
             position = 1400
     ),
     
     // editor popups
     @ActionReference(
-            path = "Editors/"+GAUtilities.GA_MIME_TYPE+"/Popup",
+            path = "Editors/"+GaFileUtils.GA_MIME_TYPE+"/Popup",
             id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
             position = 30
     ),
     @ActionReference(
-            path = "Editors/"+GAUtilities.GA_MIME_TYPE+"/Popup",
+            path = "Editors/"+GaFileUtils.GA_MIME_TYPE+"/Popup",
             id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
             position = 70,
             separatorAfter = 90
@@ -115,8 +116,8 @@ public class ocgaDataObject extends MultiDataObject {
 
     public ocgaDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
-        registerEditor(GAUtilities.GA_MIME_TYPE, true);
-        registerTruffleMimeType(GAUtilities.GA_MIME_TYPE);
+        registerEditor(GaFileUtils.GA_MIME_TYPE, true);
+        registerTruffleMimeType(GaFileUtils.GA_MIME_TYPE);
     }
 
     @Override
@@ -127,7 +128,7 @@ public class ocgaDataObject extends MultiDataObject {
     @MultiViewElement.Registration(
             displayName = "#LBL_ocga_EDITOR",
             iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
-            mimeType = GAUtilities.GA_MIME_TYPE,
+            mimeType = GaFileUtils.GA_MIME_TYPE,
             persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
             preferredID = "ocga",
             position = 1000
