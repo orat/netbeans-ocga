@@ -219,13 +219,16 @@
             <version>${graalvm.version}</version>
             <type>jar</type>
         </dependency-->
+        
         <!-- brauche ich das wirklich - auskommentieren hat zu einem Fehler geführt -->
         <!-- ersetzt durch org.netbeans.libs.truffleapi-->
+        <!-- Truffle Unchained Runtime (Allows running Truffle on standard JDKs) -->
         <!--dependency>
             <groupId>org.graalvm.truffle</groupId>
             <artifactId>truffle-api</artifactId>
-            <version>${graalvm.version}</version>
+           <version>${graalvm.version}</version>
         </dependency-->
+        
         <!-- das hinzufügen hat nichts gebracht, obwohl das im simpleLanuguage beispiel drin ist:
              https://github.com/graalvm/simplelanguage/blob/master/language/pom.xml
              und auch als runtime-dependency in ga selbst -->
@@ -236,8 +239,9 @@
             <scope>runtime</scope>
         </dependency-->
         
+        <!-- My Truffle Language Implementation -->
         <!-- language einhängen nur zur runtime fragezeichen, wird nur gefunden
-             wenn type == jar -->
+             wenn type == jar, braucht der language server -->
         <dependency>
             <groupId>de.dhbw.rahmlab</groupId>
             <artifactId>DSL4GA_Impl_Truffle</artifactId>
@@ -346,17 +350,19 @@
             <artifactId>DSL4GA_Common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency-->
-        <dependency>
+        <!-- TODO brauche ich das noch-->
+        <!--dependency>
             <groupId>de.orat.math.cga</groupId>
             <artifactId>ConformalGeometricAlgebra</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency-->
+        
         <!-- indirect dependency introduced via ConformalGeometricAlgebra -->
-        <dependency>
+        <!--dependency>
             <groupId>de.orat.math.ga</groupId>
             <artifactId>GeometricAlgebra</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency-->
                 
         <dependency>
             <groupId>de.orat.view3d</groupId>
