@@ -210,6 +210,7 @@
             <type>jar</type>
         </dependency>
         
+       
         <!-- The polyglot dependency is always required for Java embeddings.
              It contains the polyglot embedding APIs to include any polyglot language. -->
         <!--dependency>
@@ -412,6 +413,12 @@
             <version>33.5.0-jre</version>
             <!--scope>runtime</scope>
             <type>pom.sha512</type-->
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-lsp-client</artifactId>
+            <version>RELEASE270</version>
             <type>jar</type>
         </dependency>
     </dependencies>
