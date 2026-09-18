@@ -52,11 +52,11 @@
                     <!-- Erzwingt exakt dieselbe Classloader-Ebene -->
                     <moduleDependencies>
                         <dependency>
-                            <id>org.netbeans.libs.truffleapi</id>
+                            <id>org.netbeans.api:org-netbeans-libs-truffleapi</id>
                             <type>impl</type> 
                         </dependency>
                         <dependency>
-                            <id>org.netbeans.libs.graalsdk</id>
+                            <id>org.netbeans.api:org-netbeans-libs-graalsdk</id>
                             <type>impl</type>
                     </dependency>
                     </moduleDependencies>

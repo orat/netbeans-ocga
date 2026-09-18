@@ -74,43 +74,13 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
     @Override
     public synchronized LanguageServerDescription startServer(Lookup lookup) {
         
-        // Sichere den aktuellen ClassLoader von NetBeans
-        //ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader originalClassLoader = Thread.currentThread().getContextClassLoader();
 
         try {
-            
-            //printInstrumentProviders();
-            
-            System.out.println("=== POLYGLOT IMPL INSTANCE ===");
-
-            try {
-                var engine = org.graalvm.polyglot.Engine.create();
-
-                var implField = org.graalvm.polyglot.Engine.class
-                        .getDeclaredField("receiver");
-                implField.setAccessible(true);
-
-                Object receiver = implField.get(engine);
-
-                System.out.println("Engine receiver = " + receiver);
-                System.out.println("Receiver class  = " + receiver.getClass());
-                System.out.println("Receiver loader = " + receiver.getClass().getClassLoader());
-                System.out.println("Receiver source = " +
-                        receiver.getClass().getProtectionDomain().getCodeSource());
-
-            } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException ex) {
-                Exceptions.printStackTrace(ex);
-            }
-
-            
-            printPolyglotImplementations();
-            
-            printTruffleRuntime();
-            
-            printAvailableLanguageProviders();
-
-            printClassloaders();
-            
+            // GraalVM loads LSP instruments through ServiceLoader. It must use this
+            // module loader so that the Truffle implementation dependency is visible.
+            Thread.currentThread().setContextClassLoader(
+                    GenericGraalVMLanguageServer.class.getClassLoader());
             
             // 1. Combine the module classloader and the GraalSDK classloader
             ClassLoader unifiedLoader = new ClassLoader(Context.class.getClassLoader()) {
@@ -179,7 +149,7 @@ public class GenericGraalVMLanguageServer implements LanguageServerProvider {
             throw new IllegalStateException("Fehler beim Starten des In-Process LSP", ex);
         } finally {
             // WICHTIG: Beim Verlassen der Methode den NetBeans-ClassLoader wiederherstellen
-            //Thread.currentThread().setContextClassLoader(originalClassLoader);
+            Thread.currentThread().setContextClassLoader(originalClassLoader);
         }
     }
     
