@@ -1,6 +1,5 @@
 package de.orat.math.netbeans.ga.editor;
 
-import de.orat.math.netbeans.ga.api.MimeType;
 import de.orat.math.netbeans.ga.utils.GaFileUtils;
 //import org.netbeans.api.editor.mimelookup.MimeRegistration;
 //import org.netbeans.spi.editor.typinghooks.TypedTextInterceptor;
