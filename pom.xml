@@ -60,12 +60,6 @@
                             <type>impl</type>
                     </dependency>
                     </moduleDependencies>
-                    <!-- CRUCIAL STEP: Override the default package hiding -->
-                    <manifestEntries>
-                        <Fragment-Host>org.netbeans.libs.graalsdk</Fragment-Host>
-                        <Fragment-Host>org.netbeans.libs.truffleapi</Fragment-Host>
-                        <Open-Packages>com.oracle.truffle.api.instrumentation.provider</Open-Packages>
-                    </manifestEntries>
                 </configuration>
             </plugin>
             <plugin>
