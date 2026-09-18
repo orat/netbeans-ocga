@@ -12,14 +12,6 @@ import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
 import org.openide.windows.TopComponent;
 
-@MultiViewElement.Registration(
-    displayName = "#LBL_ga_VISUAL",
-    iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
-    mimeType = GaFileUtils.GA_MIME_TYPE,
-    persistenceType = TopComponent.PERSISTENCE_NEVER,
-    preferredID = "gaVisual",
-    position = 2000
-)
 public final class GaVisualElement extends JPanel implements MultiViewElement {
 
     private GaDataObject obj;
@@ -30,6 +22,18 @@ public final class GaVisualElement extends JPanel implements MultiViewElement {
         obj = lkp.lookup(GaDataObject.class);
         assert obj != null;
         initComponents();
+    }
+
+    @MultiViewElement.Registration(
+        displayName = "#LBL_ga_VISUAL",
+        iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
+        mimeType = GaFileUtils.GA_MIME_TYPE,
+        persistenceType = TopComponent.PERSISTENCE_NEVER,
+        preferredID = "gaVisual",
+        position = 2000
+    )
+    public static GaVisualElement createVisual(Lookup lkp) {
+        return new GaVisualElement(lkp);
     }
 
     @Override
