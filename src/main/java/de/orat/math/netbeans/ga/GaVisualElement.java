@@ -1,5 +1,6 @@
 package de.orat.math.netbeans.ga;
 
+import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ import org.openide.windows.TopComponent;
 @MultiViewElement.Registration(
     displayName = "#LBL_ga_VISUAL",
     iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
-    mimeType = "+GAUtilities.GA_MIME_TYPE+",
+    mimeType = GaFileUtils.GA_MIME_TYPE,
     persistenceType = TopComponent.PERSISTENCE_NEVER,
     preferredID = "gaVisual",
     position = 2000
