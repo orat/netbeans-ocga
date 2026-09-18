@@ -1,8 +1,10 @@
 package de.orat.math.netbeans.ga.algebra;
 
+import de.orat.math.gacalc.api.GAFactory;
 import de.orat.math.gacalc.api.GAServiceLoader;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,9 +20,12 @@ public final class GaGrammarGenerator {
         }
         Path classesDirectory = Path.of(args[0]);
         Map<String, Set<String>> constantsByAlgebra = new LinkedHashMap<>();
-        for (String algebraId : GaAlgebras.ids()) {
-            Map<String, ?> constants = GAServiceLoader.getGAFactoryThrowing(algebraId).getConstants();
-            constantsByAlgebra.put(algebraId, constants.keySet());
+        for (GAFactory factory : GAServiceLoader.instance().getGAFactories()) {
+            // Several implementations can provide the same algebra. The grammar
+            // has one context per algebra ID, so it highlights their combined constants.
+            constantsByAlgebra
+                    .computeIfAbsent(factory.getAlgebra(), ignored -> new LinkedHashSet<>())
+                    .addAll(factory.getConstants().keySet());
         }
         new GrammarRenderer().render(classesDirectory, constantsByAlgebra);
     }
