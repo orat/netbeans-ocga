@@ -7,7 +7,7 @@
   ],
   "repository": {
     "algebra-contexts": { "patterns": [
-      {{ALGEBRA_CONTEXTS}}
+      { "name": "meta.template.generated-algebra-contexts.ga", "match": "(?!)" }
     ] },
     "common": { "patterns": [
       { "include": "#comments" },

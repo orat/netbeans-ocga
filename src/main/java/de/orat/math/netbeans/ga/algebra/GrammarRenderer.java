@@ -13,6 +13,8 @@ import java.util.Set;
 final class GrammarRenderer {
 
     private static final String RESOURCE_ROOT = "de/orat/math/netbeans/ga/generated";
+    private static final String ALGEBRA_CONTEXTS_PLACEHOLDER
+            = "{ \"name\": \"meta.template.generated-algebra-contexts.ga\", \"match\": \"(?!)\" }";
     private final String template;
 
     GrammarRenderer() throws IOException {
@@ -20,7 +22,8 @@ final class GrammarRenderer {
     }
 
     void render(Path classesDirectory, Map<String, Set<String>> constantsByAlgebra) throws IOException {
-        String grammar = template.replace("{{ALGEBRA_CONTEXTS}}", algebraContexts(constantsByAlgebra));
+        // This valid but never-matching rule keeps the JSON template editable in NetBeans.
+        String grammar = template.replace(ALGEBRA_CONTEXTS_PLACEHOLDER, algebraContexts(constantsByAlgebra));
         // The source tree contains a minimal resource at this path so NetBeans'
         // annotation processor can validate the registration during compilation.
         // Packaging replaces that placeholder in target/classes with this grammar.
