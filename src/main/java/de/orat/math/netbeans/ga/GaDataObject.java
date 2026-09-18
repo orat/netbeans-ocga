@@ -16,14 +16,10 @@ import org.openide.loaders.DataObjectExistsException;
 import org.openide.loaders.MultiDataObject;
 import org.openide.loaders.MultiFileLoader;
 import org.openide.util.Lookup;
-import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 
-@Messages({
-    "LBL_ga_LOADER=Files of ga"
-})
 @MIMEResolver.ExtensionRegistration(
     displayName = "#LBL_ga_LOADER",
     mimeType = GaFileUtils.GA_MIME_TYPE,
@@ -133,7 +129,6 @@ public class GaDataObject extends MultiDataObject {
         preferredID = "ga",
         position = 1000
     )
-    @Messages("LBL_ga_EDITOR=Source")
     public static MultiViewEditorElement createEditor(Lookup lkp) {
         return new MultiViewEditorElement(lkp);
     }

@@ -10,7 +10,6 @@ import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.openide.awt.UndoRedo;
 import org.openide.util.Lookup;
-import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 @MultiViewElement.Registration(
@@ -21,7 +20,6 @@ import org.openide.windows.TopComponent;
     preferredID = "gaVisual",
     position = 2000
 )
-@Messages("LBL_ga_VISUAL=Visual")
 public final class GaVisualElement extends JPanel implements MultiViewElement {
 
     private GaDataObject obj;
