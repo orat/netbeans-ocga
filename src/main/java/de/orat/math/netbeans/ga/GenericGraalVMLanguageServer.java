@@ -1,4 +1,4 @@
-package de.orat.math.netbeans.ocga;
+package de.orat.math.netbeans.ga;
 
 import static de.dhbw.rahmlab.dsl4ga.impl.truffle.common.runtime.GeomAlgeLang.LANGUAGE_ID;
 import de.orat.math.netbeans.ga.utils.GaFileUtils;

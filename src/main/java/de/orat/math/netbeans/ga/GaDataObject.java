@@ -1,4 +1,4 @@
-package de.orat.math.netbeans.ocga;
+package de.orat.math.netbeans.ga;
 
 import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import org.openide.windows.TopComponent;
 import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 
 @Messages({
-    "LBL_ocga_LOADER=Files of ga"
+    "LBL_ga_LOADER=Files of ga"
 })
 @MIMEResolver.ExtensionRegistration(
     displayName = "#LBL_ga_LOADER",

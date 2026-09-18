@@ -1,4 +1,4 @@
-package de.orat.math.netbeans.ocga;
+package de.orat.math.netbeans.ga;
 
 import java.util.HashMap;
 import java.util.Map;

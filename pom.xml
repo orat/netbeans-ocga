@@ -440,5 +440,5 @@
     </properties>
     
     <name>netbeans-ocga</name>
-    <description>ocga support, also starts the language server</description>
+    <description>ga support, also starts the language server</description>
 </project>

@@ -1,4 +1,4 @@
-package de.orat.math.netbeans.ocga;
+package de.orat.math.netbeans.ga;
 
 import javax.swing.Action;
 import javax.swing.JComponent;

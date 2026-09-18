@@ -1,8 +1,5 @@
 package de.orat.math.netbeans.ga;
 
-import de.orat.math.netbeans.ga.api.MimeType;
-import de.orat.math.netbeans.ocga.*;
-import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.util.function.Consumer;
 import javax.swing.text.Document;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;

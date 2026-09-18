@@ -10,9 +10,6 @@ import org.netbeans.api.annotations.common.NonNull;
  */
 public enum MimeType {
 
-    // deprecated
-    //OCGA("text/x-ocga"),
-    
     //GA("text/ga"),
     PGA("text/ga-pga"), // NOI18N
     CGA("text/ga-cga"), // NOI18N
