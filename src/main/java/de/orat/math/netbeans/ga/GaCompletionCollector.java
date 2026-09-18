@@ -1,5 +1,6 @@
 package de.orat.math.netbeans.ga;
 
+import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.util.function.Consumer;
 import javax.swing.text.Document;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
@@ -9,7 +10,7 @@ import org.netbeans.spi.lsp.CompletionCollector;
 /**
  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
-@MimeRegistration(mimeType = "text/x-ga", service = CompletionCollector.class)
+@MimeRegistration(mimeType = GaFileUtils.GA_MIME_TYPE, service = CompletionCollector.class)
 public class GaCompletionCollector implements CompletionCollector {
 
     @Override
