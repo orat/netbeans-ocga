@@ -35,7 +35,7 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
     displayName = "#LBL_ga_LOADER",
     position = 300
 )
-@GrammarRegistration(grammar = "ga.tmLanguage.json", mimeType = GaFileUtils.GA_MIME_TYPE)
+@GrammarRegistration(grammar = "generated/ga.tmLanguage.json", mimeType = GaFileUtils.GA_MIME_TYPE)
 @ActionReferences({
     @ActionReference(
             path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",

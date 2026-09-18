@@ -3,16 +3,13 @@ package de.orat.math.netbeans.ga;
 import java.util.function.Consumer;
 import javax.swing.text.Document;
 import org.netbeans.api.editor.mimelookup.MimeRegistration;
-import org.netbeans.api.editor.mimelookup.MimeRegistrations;
 import org.netbeans.api.lsp.Completion;
 import org.netbeans.spi.lsp.CompletionCollector;
 
 /**
  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
-@MimeRegistrations({@MimeRegistration(mimeType = "text/ga-pga", service = CompletionCollector.class),
-                    @MimeRegistration(mimeType = "text/ga-cga", service = CompletionCollector.class),
-                    @MimeRegistration(mimeType = "text/ga-g6", service = CompletionCollector.class)})
+@MimeRegistration(mimeType = "text/x-ga", service = CompletionCollector.class)
 public class GaCompletionCollector implements CompletionCollector {
 
     @Override

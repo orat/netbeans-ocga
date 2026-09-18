@@ -1,0 +1,37 @@
+{
+  "name": "ga",
+  "scopeName": "text.ga",
+  "patterns": [
+    { "include": "#algebra-contexts" },
+    { "include": "#common" }
+  ],
+  "repository": {
+    "algebra-contexts": { "patterns": [
+      {{ALGEBRA_CONTEXTS}}
+    ] },
+    "common": { "patterns": [
+      { "include": "#comments" },
+      { "include": "#operators" },
+      { "include": "#functions" },
+      { "include": "#variables" }
+    ] },
+    "comments": { "patterns": [
+      { "name": "comment.block.ga", "begin": "/\\*", "end": "\\*/" },
+      { "begin": "(^\\s+)?(?=//)", "end": "(?=$)", "patterns": [
+        { "name": "comment.line.double-slash.ga", "begin": "(?<!/)//(?:(?!/)|(?=//))", "end": "(?=$)" }
+      ] }
+    ] },
+    "operators": { "patterns": [
+      { "name": "keyword.operator.base-secondary.ga", "match": "∧|\\+|-|⌋|⌊|∨|/" },
+      { "name": "keyword.operator.add-secondary.ga", "match": "⋅|∩|∪" },
+      { "name": "keyword.operator.base-primary.ga", "match": "(?<!\\s)(⁻¹|\\*|†|˜)" },
+      { "name": "keyword.operator.add-primary.ga", "match": "(?<!\\s)(⁻\\*|²|\\^)" },
+      { "name": "keyword.operator.assignment.ga", "match": ":=" }
+    ] },
+    "functions": { "patterns": [
+      { "name": "entity.name.function.base.ga", "match": "(?<!\\w)(?:dot|ip|scp|up|down|exp|log|normalize|norm|abs|sqrt|atan2|negate14|tan|sin|sinh|cos|cosh|atan|asin|acos|sign)(?=\\()" },
+      { "name": "entity.name.function.additional.ga", "match": "(?<!\\w)(?:translator|rotator)(?=\\()" }
+    ] },
+    "variables": { "match": "(^\\w+?)(?=\\s*?:=)", "captures": { "1": { "name": "variable.parameter.ga" } } }
+  }
+}
