@@ -12,7 +12,7 @@ import org.openide.util.Lookup;
 import org.openide.util.NbPreferences;
 
 public class Installer extends ModuleInstall {
-    static final Logger LOG = Logger.getLogger(ocgaDataObject.class.getName());
+    static final Logger LOG = Logger.getLogger(GaDataObject.class.getName());
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -27,7 +27,7 @@ public class Installer extends ModuleInstall {
             pref.putBoolean("openSubprojects", true);
             
         } catch (ClassNotFoundException ex) {
-            LOG.log(Level.WARNING, "Cannot register breakpoints for ocga", ex);
+            LOG.log(Level.WARNING, "Cannot register breakpoints for ga", ex);
         }
         
         

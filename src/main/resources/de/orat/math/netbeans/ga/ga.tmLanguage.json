@@ -1,6 +1,6 @@
 {
-	"name": "ocga",
-        "scopeName": "text.ocga",
+	"name": "ga",
+    "scopeName": "text.ga",
 	"patterns": [
 		{
 			"include": "#comments"
@@ -22,7 +22,7 @@
 		"comments": {
 			"patterns": [
                 {
-                    "name": "comment.block.ocga",
+                    "name": "comment.block.ga",
                     "begin": "/\\*",
                     "end": "\\*/"
                 },
@@ -31,7 +31,7 @@
                     "end": "(?=$)",
                     "patterns": [
                         {
-                            "name": "comment.line.double-slash.ocga",
+                            "name": "comment.line.double-slash.ga",
                             "begin": "(?<!/)//(?:(?!/)|(?=//))",
                             "end": "(?=$)"
                         }
@@ -42,23 +42,23 @@
 		"operators": {
 			"patterns": [
 				{
-					"name": "keyword.operator.base-secondary.ocga",
+					"name": "keyword.operator.base-secondary.ga",
 					"match": "∧|\\+|-|⌋|⌊|∨|/"
 				},
 				{
-					"name": "keyword.operator.add-secondary.ocga",
+					"name": "keyword.operator.add-secondary.ga",
 					"match": "⋅|∩|∪"
 				},
 				{
-					"name": "keyword.operator.base-primary.ocga",
+					"name": "keyword.operator.base-primary.ga",
 					"match": "(?<!\\s)(⁻¹|\\*|†|˜)"
 				},
 				{
-					"name": "keyword.operator.add-primary.ocga",
+					"name": "keyword.operator.add-primary.ga",
 					"match": "(?<!\\s)(⁻\\*|²|\\^)"
 				},
 				{
-                    "name": "keyword.operator.assignment.ocga",
+                    "name": "keyword.operator.assignment.ga",
                     "match": ":="
                 }
 			]
@@ -67,10 +67,10 @@
 			"begin": "((dot|ip|scp|up|down|exp|log|normalize|norm|abs|sqrt|atan2|negate14|tan|sin|sinh|cos|cosh|atan|asin|acos|sign)|(translator|rotator))\\(",
 			"beginCaptures": {
 				"2": {
-					"name": "entity.name.function.base.ocga"
+					"name": "entity.name.function.base.ga"
 				},
 				"3": {
-					"name": "entity.name.function.additional.ocga"
+					"name": "entity.name.function.additional.ga"
 				}
 			},
 			"end": "\\)",
@@ -87,22 +87,22 @@
 			"match": "(^\\w+?)(?=\\s*?:=)",
 			"captures": {
 				"1": {
-					"name": "variable.parameter.ocga"
+					"name": "variable.parameter.ga"
 				}
 			}
 		},
 		"symbols": {
 			"patterns": [
 				{
-					"name": "constant.language.base-vector.ocga",
+					"name": "constant.language.base-vector.ga",
 					"match": "ε(₀|ᵢ|₁|₂|₃)"
 				},
 				{
-					"name": "constant.numeric.ocga",
+					"name": "constant.numeric.ga",
 					"match": "π|∞"
 				},
 				{
-					"name": "constant.language.add-vector.ocga",
+					"name": "constant.language.add-vector.ga",
 					"match": "(?<!\\w)(o|n|E)(?!\\w)|ñ|E(₀|₃)"
 				}
 			]

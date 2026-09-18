@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/NetBeansModuleDevelopment-files/templateDataObjectMultiForm.java to edit this template
- */
 package de.orat.math.netbeans.ocga;
 
 import javax.swing.Action;
@@ -17,29 +13,29 @@ import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
 @MultiViewElement.Registration(
-        displayName = "#LBL_ocga_VISUAL",
-        iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
-        mimeType = "+GAUtilities.GA_MIME_TYPE+",
-        persistenceType = TopComponent.PERSISTENCE_NEVER,
-        preferredID = "ocgaVisual",
-        position = 2000
+    displayName = "#LBL_ga_VISUAL",
+    iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
+    mimeType = "+GAUtilities.GA_MIME_TYPE+",
+    persistenceType = TopComponent.PERSISTENCE_NEVER,
+    preferredID = "gaVisual",
+    position = 2000
 )
-@Messages("LBL_ocga_VISUAL=Visual")
-public final class ocgaVisualElement extends JPanel implements MultiViewElement {
+@Messages("LBL_ga_VISUAL=Visual")
+public final class GaVisualElement extends JPanel implements MultiViewElement {
 
-    private ocgaDataObject obj;
+    private GaDataObject obj;
     private JToolBar toolbar = new JToolBar();
     private transient MultiViewElementCallback callback;
 
-    public ocgaVisualElement(Lookup lkp) {
-        obj = lkp.lookup(ocgaDataObject.class);
+    public GaVisualElement(Lookup lkp) {
+        obj = lkp.lookup(GaDataObject.class);
         assert obj != null;
         initComponents();
     }
 
     @Override
     public String getName() {
-        return "ocgaVisualElement";
+        return "gaVisualElement";
     }
 
     /**

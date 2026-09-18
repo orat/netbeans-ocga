@@ -22,20 +22,20 @@ import org.openide.windows.TopComponent;
 import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 
 @Messages({
-    "LBL_ocga_LOADER=Files of ocga"
+    "LBL_ocga_LOADER=Files of ga"
 })
 @MIMEResolver.ExtensionRegistration(
-        displayName = "#LBL_ocga_LOADER",
-        mimeType = GaFileUtils.GA_MIME_TYPE,
-        extension = {"ocga"}
+    displayName = "#LBL_ga_LOADER",
+    mimeType = GaFileUtils.GA_MIME_TYPE,
+    extension = {"ga"}
 )
 @DataObject.Registration(
-        mimeType = GaFileUtils.GA_MIME_TYPE,
-        iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
-        displayName = "#LBL_ocga_LOADER",
-        position = 300
+    mimeType = GaFileUtils.GA_MIME_TYPE,
+    iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
+    displayName = "#LBL_ga_LOADER",
+    position = 300
 )
-@GrammarRegistration(grammar="ocga.tmLanguage.json", mimeType=GaFileUtils.GA_MIME_TYPE)
+@GrammarRegistration(grammar = "ga.tmLanguage.json", mimeType = GaFileUtils.GA_MIME_TYPE)
 @ActionReferences({
     @ActionReference(
             path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
@@ -112,9 +112,9 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
             separatorAfter = 90
     )
 })
-public class ocgaDataObject extends MultiDataObject {
+public class GaDataObject extends MultiDataObject {
 
-    public ocgaDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
+    public GaDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
         registerEditor(GaFileUtils.GA_MIME_TYPE, true);
         registerTruffleMimeType(GaFileUtils.GA_MIME_TYPE);
@@ -126,14 +126,14 @@ public class ocgaDataObject extends MultiDataObject {
     }
 
     @MultiViewElement.Registration(
-            displayName = "#LBL_ocga_EDITOR",
-            iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
-            mimeType = GaFileUtils.GA_MIME_TYPE,
-            persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
-            preferredID = "ocga",
-            position = 1000
+        displayName = "#LBL_ga_EDITOR",
+        iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
+        mimeType = GaFileUtils.GA_MIME_TYPE,
+        persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
+        preferredID = "ga",
+        position = 1000
     )
-    @Messages("LBL_ocga_EDITOR=Source")
+    @Messages("LBL_ga_EDITOR=Source")
     public static MultiViewEditorElement createEditor(Lookup lkp) {
         return new MultiViewEditorElement(lkp);
     }
@@ -141,7 +141,7 @@ public class ocgaDataObject extends MultiDataObject {
     private void registerTruffleMimeType(String mime) throws IOException {
         ClassLoader all = Lookup.getDefault().lookup(ClassLoader.class);
         if (all == null) {
-            all = ocgaDataObject.class.getClassLoader();
+            all = GaDataObject.class.getClassLoader();
         }
         try {
             var clazz = all.loadClass("org.netbeans.modules.debugger.jpda.truffle.MIMETypes");
@@ -155,7 +155,7 @@ public class ocgaDataObject extends MultiDataObject {
             // org-netbeans-modules-debugger-jpda-truffle als dependency hinzufügen
             
         } catch (ReflectiveOperationException ex) {
-            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for ocga", ex);
+            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for ga", ex);
         }
     }
 }

@@ -9,8 +9,8 @@ import org.netbeans.api.lsp.StructureElement;
 import org.netbeans.spi.lsp.StructureProvider;
 
 // wird vermutlich nur vom LSPServer gebraucht
-//@MimeRegistration(mimeType = "text/x-ocga", service = StructureProvider.class)
-public final class OcgaStructure implements StructureProvider {
+//@MimeRegistration(mimeType = "text/x-ga", service = StructureProvider.class)
+public final class GaStructure implements StructureProvider {
 
     @Override
     public List<StructureElement> getStructure(Document dcmnt) {
