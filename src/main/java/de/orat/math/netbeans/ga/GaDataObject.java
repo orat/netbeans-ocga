@@ -122,7 +122,7 @@ public class GaDataObject extends MultiDataObject {
     }
 
     @MultiViewElement.Registration(
-        displayName = "#LBL_ga_EDITOR",
+        displayName = "LBL_ga_EDITOR",
         iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
         mimeType = GaFileUtils.GA_MIME_TYPE,
         persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,

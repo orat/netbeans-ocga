@@ -1,4 +1,4 @@
-package de.orat.math.netbeans.ocga;
+package de.orat.math.netbeans.ga;
 
 import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.io.File;
