@@ -126,7 +126,7 @@ public class ocgaDataObject extends MultiDataObject {
     }
 
     @MultiViewElement.Registration(
-            displayName = "#LBL_ocga_EDITOR",
+            displayName = "LBL_ocga_EDITOR",
             iconBase = "de/orat/math/netbeans/ocga/Letter-G-lg-icon.png",
             mimeType = GaFileUtils.GA_MIME_TYPE,
             persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,

@@ -5,7 +5,15 @@ package de.orat.math.netbeans.ga.utils;
  */
 public class GaFileUtils {
 
-    public static final String GA_MIME_TYPE = "text/x-ocga";
+    // new
+    // All these need to be compatible with GeometricAlgebraLang in my Truffle language impl
+    // Otherwise, debugging stops working.
+    public static final String LANGUAGE_ID = "ocga";
+    public static final String FILE_ENDING = ".ocga";
+    public static final String MIME_TYPE = "text/x-ocga"; //"application/x-ocga";
+        
+    // old
+    public static final String GA_MIME_TYPE = "text/x-ocga"; //FIXME leicht durch const oben ersetzen
     //public static final String GA_LANGUAGE_NAME = "ga";
     // better use LANGUAGE_ID from de.dhbw.rahmlab.dsl4ga.impl.truffle.api.Program
     
