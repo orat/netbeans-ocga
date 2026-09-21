@@ -67,6 +67,11 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
+                    <!-- The generator is executed during the build only.  Do not
+                         ship its GA API references with the NetBeans module. -->
+                    <excludes>
+                        <exclude>de/orat/math/netbeans/ga/algebra/GaGrammarGenerator.class</exclude>
+                    </excludes>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
@@ -85,7 +90,10 @@
                         </goals>
                         <configuration>
                             <mainClass>de.orat.math.netbeans.ga.algebra.GaGrammarGenerator</mainClass>
-                            <classpathScope>runtime</classpathScope>
+                            <!-- GACalcAPI and its factory implementations are
+                                 provided dependencies: available for grammar
+                                 generation, but absent from the installed module. -->
+                            <classpathScope>compile</classpathScope>
                             <arguments>
                                 <argument>${project.build.outputDirectory}</argument>
                             </arguments>
@@ -264,12 +272,16 @@
             <groupId>de.orat.math.gacalc</groupId>
             <artifactId>GACalcAPI</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <!-- Used only by GaGrammarGenerator while packaging the plugin. -->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>de.orat.math.gacasadi</groupId>
             <artifactId>GACasADi</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <!-- Supplies GAFactory services during grammar generation only. -->
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
