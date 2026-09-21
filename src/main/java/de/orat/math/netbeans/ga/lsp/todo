@@ -1,0 +1,18 @@
+das muss ich mit maven bauen
+mit GaLspMain testen
+wird von GaLsPRuntime gebraucht
+target/nbm/modules/ext/graal/
+
+netbeans-ocga/
+    modules/
+        com-example-ga.jar
+
+    ext/
+        graal/
+            polyglot-24.0.0.jar
+            truffle-api-24.0.0.jar
+            lsp-24.0.0.jar
+            lsp_api-24.0.0.jar
+            ...
+        ga/
+            ga-language.jar

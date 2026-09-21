@@ -10,12 +10,67 @@
         <version>1.0-SNAPSHOT</version>
     </parent-->
     <groupId>de.orat.math</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <artifactId>netbeans-ocga</artifactId>
     <packaging>nbm</packaging>
     
     <build>
         <plugins>
+            <!-- create folder target/nbm/modules/ext/graal/ with libs to
+                 start the lsp -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-graal-runtime</id>
+                        <!--phase>package</phase-->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- ${project.build.directory}/nbm/modules/ext/graal -->
+                            <outputDirectory>
+                                 ${project.build.directory}/graal-runtime
+                            </outputDirectory>
+                            <includeGroupIds>
+                                org.graalvm.polyglot,
+                                org.graalvm.sdk,
+                                org.graalvm.truffle,
+                                org.graalvm.tools,
+                                org.graalvm.shadowed
+                            </includeGroupIds>
+                            <includeScope>runtime</includeScope>
+                            <stripVersion>false</stripVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-graal-runtime-reloadable</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/nbm/clusters/extra/modules/ext/graal
+                            </outputDirectory>
+
+                            <includeGroupIds>
+                                org.graalvm.polyglot,
+                                org.graalvm.sdk,
+                                org.graalvm.truffle,
+                                org.graalvm.tools,
+                                org.graalvm.shadowed
+                            </includeGroupIds>
+
+                            <includeScope>runtime</includeScope>
+                            <stripVersion>false</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.netbeans.utilities</groupId>
                 <!-- this plugin registers the nbm packaging type -->
@@ -23,49 +78,22 @@
                 <version>14.4</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <!-- NetBeans scannt die Projektdateien und initialisiert 
-                         die Truffle-Bibliotheken im Hintergrund, noch bevor die 
-                         Plugin-Klasse überhaupt geladen werden Zu diesem Zeitpunkt 
-                         ist die Klassenisolation der JVM bereits aktiv und lässt 
-                         sich nachträglich nicht mehr per System.setProperty() 
-                         abschalten.Da dies innerhalb der NetBeans-IDE geschieht, 
-                         muss die Optionen für die Laufzeitumgebung (JVM) der 
-                         Testinstanz erzwungen werden.-->
-                    <!--netbeansArgs>-J-Dpolyglotimpl.DisableClassPathIsolation=true</netbeansArgs-->
-                    <!-- Deaktiviert die strikte Classpath-Verifizierung bei externen Klassen -->
-                    <!-- Verhindert den Build-Abbruch, da Truffle-Klassen dynamisch bereitgestellt werden -->
                     <verifyRuntime>warn</verifyRuntime>
-                    <!-- Expose the truffle language classes to the NetBeans runtime -->
-                    <!--publicPackages>
-                        <publicPackage>de.dhbh.rahmlab.dsl4ga.impl.truffle.*</publicPackage>
-                    </publicPackages-->
-                    <!-- testweise 
-                         Standardmäßig erlaubt NetBeans einem Modul nur den Zugriff 
-                         auf Klassen, die ein anderes Modul explizit als öffentliche 
-                         API freigegeben hat.Mit <type>impl</type> deklarierst du eine 
-                         sogenannte Implementation Dependency.Das bedeutet: Dein Modul 
-                         darf alle internen, privaten und experimentellen Klassen des 
-                         Moduls org.netbeans.libs.truffleapi direkt sehen und nutzen 
-                         (auch solche, die nicht im offiziellen JavaDoc stehen). Da der 
-                         GraalVM-In-Process-LSP tief auf interne APIs (wie den Service-Provider PolyglotImpl) 
-                         zugreifen muss, ist dies oft zwingend notwendig.-->
-                    <!-- Erzwingt exakt dieselbe Classloader-Ebene -->
-                    <moduleDependencies>
-                        <dependency>
-                            <id>org.netbeans.libs.truffleapi</id>
-                            <type>impl</type> 
-                        </dependency>
-                        <dependency>
-                            <id>org.netbeans.libs.graalsdk</id>
-                            <type>impl</type>
-                    </dependency>
-                    </moduleDependencies>
-                    <!-- CRUCIAL STEP: Override the default package hiding -->
-                    <manifestEntries>
-                        <Fragment-Host>org.netbeans.libs.graalsdk</Fragment-Host>
-                        <Fragment-Host>org.netbeans.libs.truffleapi</Fragment-Host>
-                        <Open-Packages>com.oracle.truffle.api.instrumentation.provider</Open-Packages>
-                    </manifestEntries>
+                    <!-- However, there's a wrinkle with your Snap installation: 
+                         /snap/netbeans/... is read-only. NetBeans therefore cannot 
+                         install the module's cluster there and should fall back to the userdir.
+                         angeblich geht das mit snap installations nicht -->
+                    <cluster>extra</cluster>
+                    <requiresRestart>true</requiresRestart>
+                    <nbmResources>
+                        <nbmResource>
+                            <directory>${project.build.directory}/graal-runtime</directory>
+                            <targetPath>modules/ext/graal</targetPath>
+                            <includes>
+                                <include>**/*.jar</include>
+                            </includes>
+                        </nbmResource>
+                    </nbmResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -305,12 +333,13 @@
         <!-- lanugage server stuff -->
         
         <!-- damit kann der graalvm lsp in netbeans eingehängt werden -->
-        <dependency>
+        <!--dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-lsp-client</artifactId>
             <version>${netbeans.version}</version>
             <type>jar</type>
-        </dependency>
+        </dependency-->
+        
         <!-- damit habe ich context class, brauche ich im den graalvm LSP starten zu können
              das macht dann aber Probleme mit transitiven Abhängigkeiten, die ich 
              ausschließen muss        -->
@@ -320,17 +349,17 @@ Caused: java.lang.NoClassDefFoundError: org/graalvm/polyglot/Context
 -->
         <!-- liefert word und nativeimage -->
         <!-- da soll auch polyglot drin sein fragezeichen -->
-        <dependency>
+        <!--dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-libs-graalsdk</artifactId>
             <version>${netbeans.version}</version>
-        </dependency>
+        </dependency-->
         <!-- liefert truffleapi, truffle-compiler und truffle-runtime-->
-        <dependency>
+        <!--dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-libs-truffleapi</artifactId>
             <version>${netbeans.version}</version>
-        </dependency>
+        </dependency-->
         
         <!--dependency>
             <groupId>org.netbeans.api</groupId>
@@ -368,65 +397,86 @@ Caused: java.lang.NoClassDefFoundError: org/graalvm/polyglot/Context
                 </exclusion>
             </exclusions-->
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.graalvm.tools</groupId>
             <artifactId>lsp-tool</artifactId>
             <version>24.0.0</version>
+        </dependency-->
+    
+    
+        <!-- no dependency to my language to prevent transitive dependendies to libs
+             which are shipped in a copy by netbeans itself -->    
+        <!--dependency>
+                <groupId>de.dhbw.rahmlab</groupId>
+                <artifactId>DSL4GA_API</artifactId>
+                <version>1.0-SNAPSHOT</version>
+        </dependency-->
+        <!--dependency>
+            <groupId>de.dhbw.rahmlab</groupId>
+            <artifactId>DSL4GA_Common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency-->
+
+        <!-- https://mvnrepository.com/artifact/org.graalvm.tools/lsp -->
+
+        <!-- Truffle Language Server backend API. -->
+        <!--dependency>
+            <groupId>org.graalvm.tools</groupId>
+            <artifactId>lsp_api</artifactId>
+            <version>${graalvm.version}</version>
+        </dependency-->
+        <!-- Core module of the polyglot Truffle Language Server backend impl -->
+        <!-- brauchts damit LSPSupport baut -->
+        <!-- import org.graalvm.tools.lsp.instrument.EnvironmentProvider;
+             import org.graalvm.tools.lsp.server.ContextAwareExecutor;
+             import org.graalvm.tools.lsp.server.LSPFileSystem;
+             import org.graalvm.tools.lsp.server.TruffleAdapter;-->
+        <!-- koeente aber auch das problem mit dadurch transitiver abhängigkeit zu truffle-api führen, also
+             zu der Version die nicht in der IDE eingebaut ist-->
+        <!--dependency>
+            <groupId>org.graalvm.tools</groupId>
+            <artifactId>lsp-tool</artifactId>
+            <version>${graalvm.version}</version>
+            <type>jar</type>
+        </dependency-->
+
+        <!-- language tooling like a sampling profiler and the chrome inspector support. -->
+        <!--dependency>
+             <groupId>org.graalvm.polyglot</groupId>
+             <artifactId>tools-community</artifactId>
+             <version>${graalvm.version}</version>
+             <type>pom</type>
+        </dependency-->
+
+        <!-- fuer LSP integration NEU-->
+
+        <!-- Polyglot API -->
+        <dependency>
+            <groupId>org.graalvm.polyglot</groupId>
+            <artifactId>polyglot</artifactId>
+            <version>${graalvm.version}</version>
+        </dependency>
+        <!-- Truffle -->
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>${graalvm.version}</version>
+        </dependency>
+        <!-- Generic LSP implementation -->
+        <dependency>
+            <groupId>org.graalvm.tools</groupId>
+            <artifactId>lsp-tool</artifactId>
+            <version>${graalvm.version}</version>
+        </dependency>
+        
+        <!-- annotation to register LSP -->
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-lsp-client</artifactId>
+            <version>${netbeans.version}</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
-    
-    
-    <!-- no dependency to my language to prevent transitive dependendies to libs
-         which are shipped in a copy by netbeans itself -->    
-    <!--dependency>
-            <groupId>de.dhbw.rahmlab</groupId>
-            <artifactId>DSL4GA_API</artifactId>
-            <version>1.0-SNAPSHOT</version>
-    </dependency-->
-    <!--dependency>
-        <groupId>de.dhbw.rahmlab</groupId>
-        <artifactId>DSL4GA_Common</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency-->
-    
-    <!-- https://mvnrepository.com/artifact/org.graalvm.tools/lsp -->
-
-    <!-- Truffle Language Server backend API. -->
-    <!--dependency>
-        <groupId>org.graalvm.tools</groupId>
-        <artifactId>lsp_api</artifactId>
-        <version>${graalvm.version}</version>
-    </dependency-->
-    <!-- Core module of the polyglot Truffle Language Server backend impl -->
-    <!-- brauchts damit LSPSupport baut -->
-    <!-- import org.graalvm.tools.lsp.instrument.EnvironmentProvider;
-         import org.graalvm.tools.lsp.server.ContextAwareExecutor;
-         import org.graalvm.tools.lsp.server.LSPFileSystem;
-         import org.graalvm.tools.lsp.server.TruffleAdapter;-->
-    <!-- koeente aber auch das problem mit dadurch transitiver abhängigkeit zu truffle-api führen, also
-         zu der Version die nicht in der IDE eingebaut ist-->
-    <!--dependency>
-        <groupId>org.graalvm.tools</groupId>
-        <artifactId>lsp-tool</artifactId>
-        <version>${graalvm.version}</version>
-        <type>jar</type>
-    </dependency-->
-    <!-- language tooling like a sampling profiler and the chrome inspector support. -->
-    <!--dependency>
-         <groupId>org.graalvm.polyglot</groupId>
-         <artifactId>tools-community</artifactId>
-         <version>${graalvm.version}</version>
-         <type>pom</type>
-    </dependency-->
-    <!-- brauche ich das neben lsp-tool oder brauche ich nur das fragezeichen 
-         sollte indirekt schon über das POM von ga mit drin sein -->
-    <!--dependency>
-         <groupId>org.graalvm.polyglot</groupId>
-         <artifactId>lsp-community</artifactId>
-         <version>${graalvm.version}</version>
-         <type>pom</type>
-    </dependency-->
-        
     <!-- muessen hier explizit erneut definiert werden, werden also nicht aus dem
          parent module übernommen, das parent nur aggregation macht und nicht hier
          referenziert werden kann, sonst könnte das modul nicht mehr alternativ ohne das parent
