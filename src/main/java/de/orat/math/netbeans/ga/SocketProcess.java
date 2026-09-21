@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Adapts the TCP transport to the {@link Process} lifecycle expected by the
@@ -12,8 +15,11 @@ import java.util.concurrent.TimeUnit;
  */
 final class SocketProcess extends Process {
 
+    private static final Duration GRACEFUL_SHUTDOWN_TIMEOUT = Duration.ofSeconds(2);
+
     private final Process child;
     private final Socket socket;
+    private final AtomicBoolean shutdownRequested = new AtomicBoolean();
 
     SocketProcess(Process child, Socket socket) {
         this.child = child;
@@ -62,6 +68,7 @@ final class SocketProcess extends Process {
     public void destroy() {
         closeSocket();
         child.destroy();
+        forceTerminationAfterGracePeriod();
     }
 
     @Override
@@ -74,6 +81,49 @@ final class SocketProcess extends Process {
     @Override
     public boolean isAlive() {
         return child.isAlive();
+    }
+
+    @Override
+    public long pid() {
+        return child.pid();
+    }
+
+    @Override
+    public ProcessHandle.Info info() {
+        return child.info();
+    }
+
+    @Override
+    public ProcessHandle toHandle() {
+        return child.toHandle();
+    }
+
+    @Override
+    public boolean supportsNormalTermination() {
+        return child.supportsNormalTermination();
+    }
+
+    @Override
+    public CompletableFuture<Process> onExit() {
+        return child.onExit().thenApply(ignored -> this);
+    }
+
+    private void forceTerminationAfterGracePeriod() {
+        if (!shutdownRequested.compareAndSet(false, true) || !child.isAlive()) {
+            return;
+        }
+        // Apply the timeout to a dependent future, never to the Process-owned
+        // onExit future itself. Callers must still observe the real process exit.
+        child.onExit()
+                .thenRun(() -> {
+                })
+                .orTimeout(GRACEFUL_SHUTDOWN_TIMEOUT.toMillis(), TimeUnit.MILLISECONDS)
+                .exceptionally(ex -> {
+                    if (child.isAlive()) {
+                        child.destroyForcibly();
+                    }
+                    return null;
+                });
     }
 
     private void closeSocket() {

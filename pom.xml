@@ -35,6 +35,7 @@
                     <!-- Deaktiviert die strikte Classpath-Verifizierung bei externen Klassen -->
                     <!-- Verhindert den Build-Abbruch, da Truffle-Klassen dynamisch bereitgestellt werden -->
                     <verifyRuntime>warn</verifyRuntime>
+                    <requiresRestart>true</requiresRestart>
                 </configuration>
             </plugin>
             <plugin>
@@ -54,6 +55,11 @@
                         <arg>-Xlint</arg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.4</version>
             </plugin>
             <!-- benötigt für nbm packaging -->
             <plugin>
@@ -324,6 +330,18 @@
                     <artifactId>DSL4GA_Impl_Truffle</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.14.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.14.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <!-- muessen hier explizit erneut definiert werden, werden also nicht aus dem
