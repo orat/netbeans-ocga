@@ -4,6 +4,7 @@ import de.orat.math.netbeans.ga.utils.GaFileUtils;
 import java.io.IOException;
 import java.util.Set;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.netbeans.core.spi.multiview.MultiViewElement;
 import org.netbeans.core.spi.multiview.text.MultiViewEditorElement;
 import org.openide.awt.ActionID;
@@ -22,87 +23,87 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 
 @MIMEResolver.ExtensionRegistration(
     displayName = "#LBL_ga_LOADER",
-    mimeType = GaFileUtils.GA_MIME_TYPE,
-    extension = {"ga"}
+    mimeType = GaFileUtils.MIME_TYPE,
+    extension = {GaFileUtils.FILE_EXTENSION}
 )
 @DataObject.Registration(
-    mimeType = GaFileUtils.GA_MIME_TYPE,
+    mimeType = GaFileUtils.MIME_TYPE,
     iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
     displayName = "#LBL_ga_LOADER",
     position = 300
 )
-@GrammarRegistration(grammar = "generated/ga.tmLanguage.json", mimeType = GaFileUtils.GA_MIME_TYPE)
+@GrammarRegistration(grammar = "generated/ga.tmLanguage.json", mimeType = GaFileUtils.MIME_TYPE)
 @ActionReferences({
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.OpenAction"),
             position = 100,
             separatorAfter = 200
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
             position = 230
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
             position = 270,
             separatorAfter = 290
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.CutAction"),
             position = 300
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.CopyAction"),
             position = 400,
             separatorAfter = 500
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "Edit", id = "org.openide.actions.DeleteAction"),
             position = 600
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.RenameAction"),
             position = 700,
             separatorAfter = 800
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.SaveAsTemplateAction"),
             position = 900,
             separatorAfter = 1000
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.FileSystemAction"),
             position = 1100,
             separatorAfter = 1200
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.ToolsAction"),
             position = 1300
     ),
     @ActionReference(
-            path = "Loaders/"+GaFileUtils.GA_MIME_TYPE+"/Actions",
+            path = "Loaders/"+GaFileUtils.MIME_TYPE+"/Actions",
             id = @ActionID(category = "System", id = "org.openide.actions.PropertiesAction"),
             position = 1400
     ),
     
     // editor popups
     @ActionReference(
-            path = "Editors/"+GaFileUtils.GA_MIME_TYPE+"/Popup",
+            path = "Editors/"+GaFileUtils.MIME_TYPE+"/Popup",
             id = @ActionID(category = "Project", id = "org.netbeans.modules.project.ui.RunSingle"),
             position = 30
     ),
     @ActionReference(
-            path = "Editors/"+GaFileUtils.GA_MIME_TYPE+"/Popup",
+            path = "Editors/"+GaFileUtils.MIME_TYPE+"/Popup",
             id = @ActionID(category = "Debug", id = "org.netbeans.modules.debugger.ui.actions.DebugFileAction"),
             position = 70,
             separatorAfter = 90
@@ -110,10 +111,12 @@ import org.netbeans.modules.textmate.lexer.api.GrammarRegistration;
 })
 public class GaDataObject extends MultiDataObject {
 
+    private static final Logger LOG = Logger.getLogger(GaDataObject.class.getName());
+
     public GaDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
-        registerEditor(GaFileUtils.GA_MIME_TYPE, true);
-        registerTruffleMimeType(GaFileUtils.GA_MIME_TYPE);
+        registerEditor(GaFileUtils.MIME_TYPE, true);
+        registerTruffleMimeType(GaFileUtils.MIME_TYPE);
     }
 
     @Override
@@ -124,7 +127,7 @@ public class GaDataObject extends MultiDataObject {
     @MultiViewElement.Registration(
         displayName = "#LBL_ga_EDITOR",
         iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
-        mimeType = GaFileUtils.GA_MIME_TYPE,
+        mimeType = GaFileUtils.MIME_TYPE,
         persistenceType = TopComponent.PERSISTENCE_ONLY_OPENED,
         preferredID = "ga",
         position = 1000
@@ -150,7 +153,7 @@ public class GaDataObject extends MultiDataObject {
             // org-netbeans-modules-debugger-jpda-truffle als dependency hinzufügen
             
         } catch (ReflectiveOperationException ex) {
-            Installer.LOG.log(Level.WARNING, "Cannot register breakpoints for ga", ex);
+            LOG.log(Level.WARNING, "Cannot register breakpoints for ga", ex);
         }
     }
 }

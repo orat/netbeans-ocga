@@ -1,4 +1,3 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Install: de/orat/math/netbeans/ga/Installer.class
 OpenIDE-Module-Layer: META-INF/generated-layer.xml
 OpenIDE-Module-Localizing-Bundle: de/orat/math/netbeans/ga/Bundle.properties

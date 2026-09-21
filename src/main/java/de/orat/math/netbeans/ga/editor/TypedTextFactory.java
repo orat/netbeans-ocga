@@ -12,7 +12,7 @@ import org.netbeans.spi.editor.typinghooks.TypedTextInterceptor;
  *
  * @author Oliver Rettig (Oliver.Rettig@orat.de)
  */
-@MimeRegistration(mimeType = GaFileUtils.GA_MIME_TYPE, service = TypedTextInterceptor.Factory.class)
+@MimeRegistration(mimeType = GaFileUtils.MIME_TYPE, service = TypedTextInterceptor.Factory.class)
 public class TypedTextFactory implements TypedTextInterceptor.Factory {
 
     @Override

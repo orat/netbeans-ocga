@@ -18,7 +18,7 @@ import org.netbeans.modules.lsp.client.spi.LanguageServerProvider;
 import org.openide.util.Lookup;
 
 /** Starts the GraalVM LSP in an isolated JVM and connects NetBeans by socket. */
-@MimeRegistration(mimeType = GaFileUtils.GA_MIME_TYPE, service = LanguageServerProvider.class)
+@MimeRegistration(mimeType = GaFileUtils.MIME_TYPE, service = LanguageServerProvider.class)
 public final class GenericGraalVMLanguageServer implements LanguageServerProvider {
 
     private static final Logger LOG = Logger.getLogger(GenericGraalVMLanguageServer.class.getName());

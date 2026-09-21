@@ -67,10 +67,10 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.5.0</version>
                 <configuration>
-                    <!-- The generator is executed during the build only.  Do not
-                         ship its GA API references with the NetBeans module. -->
+                    <!-- Grammar generation only runs while packaging.  Keep its
+                         implementation and GA API references out of the module. -->
                     <excludes>
-                        <exclude>de/orat/math/netbeans/ga/algebra/GaGrammarGenerator.class</exclude>
+                        <exclude>de/orat/math/netbeans/ga/algebra/**</exclude>
                     </excludes>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
@@ -192,13 +192,6 @@
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-api-lsp</artifactId>
-            <version>${netbeans.version}</version>
-            <type>jar</type>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-extexecution</artifactId>
             <version>${netbeans.version}</version>
             <type>jar</type>
@@ -267,6 +260,15 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <!-- Jzy3D, which is retained for the future visual editor, requires
+             Guava. Pin the cached version instead of its unavailable transitive
+             version so this module remains buildable offline. -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.5.0-jre</version>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
             <groupId>de.orat.math.gacalc</groupId>
@@ -285,37 +287,11 @@
         </dependency>
         
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.20.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.14.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>26.0.2</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-textmate-lexer</artifactId>
             <version>${netbeans.version}</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>33.5.0-jre</version>
-            <type>jar</type>
-        </dependency>
-        
-        
         <!-- lanugage server stuff -->
         
         <!-- damit kann der graalvm lsp in netbeans eingehängt werden -->

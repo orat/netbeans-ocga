@@ -27,7 +27,7 @@ public final class GaVisualElement extends JPanel implements MultiViewElement {
     @MultiViewElement.Registration(
         displayName = "#LBL_ga_VISUAL",
         iconBase = "de/orat/math/netbeans/ga/Letter-G-lg-icon.png",
-        mimeType = GaFileUtils.GA_MIME_TYPE,
+        mimeType = GaFileUtils.MIME_TYPE,
         persistenceType = TopComponent.PERSISTENCE_NEVER,
         preferredID = "gaVisual",
         position = 2000
