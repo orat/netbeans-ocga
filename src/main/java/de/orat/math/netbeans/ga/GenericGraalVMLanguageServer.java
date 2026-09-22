@@ -80,7 +80,7 @@ public final class GenericGraalVMLanguageServer implements LanguageServerProvide
                 .redirectErrorStream(true)
                 .start();
         ServerOutputCollector output = new ServerOutputCollector(process.getInputStream(),
-                line -> LOG.log(Level.FINE, "[GA-LSP] {0}", line));
+            line -> LOG.log(Level.INFO, "[GA-LSP] {0}", line));
         return new StartedServer(process, output, serverJar, javaExecutable);
     }
 
@@ -177,7 +177,7 @@ public final class GenericGraalVMLanguageServer implements LanguageServerProvide
         try {
             socket.close();
         } catch (IOException ex) {
-            LOG.log(Level.FINE, "Cannot close GA language server socket.", ex);
+            LOG.log(Level.WARNING, "Cannot close GA language server socket.", ex);
         }
     }
 }
